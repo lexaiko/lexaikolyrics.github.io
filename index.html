@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="hero">
+        <video autoplay loop muted plays-inline class="back-video">
+            <source src="img/video.mp4" type="video/mp4">
+        </video>
+        <button id="playButton" class="play-btn">
+            <i class="fas fa-play"></i> Play
+        </button>
+
+    <audio id="myAudio" controls>
+        <source src="song.mp3" type="audio/mpeg">
+       
+    </audio>
+        <nav>
+            <img src="img/logo.png" alt="logo" class="logo">
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">SONGS</a></li>
+                <li><a href="#">NEARBY</a></li>
+                <li><a href="#">ABOUT US</a></li>
+            </ul>
+        </nav>
+        <div class="lyrics-container">
+            <p id="lyrics"></p>
+        </div>
+            <!-- Tambahkan div lain untuk setiap bagian lirik yang ingin ditampilkan -->
+        </div>
+    </div>
+    <script>
+    const audio = document.getElementById("myAudio");
+const playButton = document.getElementById("playButton");
+const lyricsContainer = document.getElementById("lyrics");
+
+    const lyrics = [
+        { word: "Ajarkan", delay: 1200 }, 
+        { word: "aku", delay: 1000 },   
+        { word: "tuk", delay: 500 },
+        { word: "bisa", delay: 1000 },
+        { word: "dapat", delay: 1000 },
+        { word: "Ungkapkan", delay: 1200 },
+        { word: "rasa", delay: 2000 },
+        { word: "Agar", delay: 1000 },
+        { word: "kamu", delay: 500 },
+        { word: "kan", delay: 1000 },
+        { word: "percaya", delay: 1000 },
+        { word: "Begitu", delay: 1000 },
+        { word: "ku", delay: 500 },
+        { word: "butuh", delay: 1000 },
+        { word: "cinta", delay: 3000 }
+    ];
+    
+    let index = 0;
+
+function showLyrics() {
+    if (index < lyrics.length) {
+        lyricsContainer.textContent = lyrics[index].word;
+        index++;
+        setTimeout(showLyrics, lyrics[index - 1].delay);
+    } else {
+        lyricsContainer.textContent = ""; // Menghapus lirik setelah selesai
+        playButton.style.display = "block"; // Menampilkan tombol Play setelah selesai
+    }
+}
+
+playButton.addEventListener("click", function() {
+    audio.play();
+    playButton.style.display = "none";
+    showLyrics();
+});
+
+audio.addEventListener("ended", function() {
+    lyricsContainer.textContent = ""; // Menghapus lirik setelah lagu selesai
+    playButton.style.display = "block"; // Menampilkan tombol Play setelah selesai
+});</script>
+</body>
+</html>
